@@ -13,18 +13,19 @@ typedef struct temp {
 class SmartValve {
   private:
     InternalTemp inTemp;
-    // TODO : 온도 센서 제어 변수
-    // TODO : 서보 모터 객체
     float wantTemp;
+    float temperatureDiff;
     String LCDString;
 
   public:
-    SmartValve() = default;
+    SmartValve();
     void initSystem(void);
     float readResistorToTemperature(void);
-    float readTemperature(int position);
+    void setTemperature(float hot, float cold, float out);
     String toTemperatureString(void);
-    boolean isCorrectTemp(void);
+    String toWantTemperatureString(void);
+    void setTempDiff(float diff);
+    bool isCorrectTemp(void);
 };
 
 

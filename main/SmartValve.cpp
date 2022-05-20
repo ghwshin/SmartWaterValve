@@ -1,24 +1,46 @@
 #include "SmartValve.h"
 
-void SmartValve::initSystem(void) {
-  return ;
+SmartValve::SmartValve() {
+  inTemp.hotTemp = 0.0f;
+  inTemp.coldTemp = 0.0f;
+  inTemp.outTemp = 0.0f;
+  temperatureDiff = 0.0f;
 }
 
 float SmartValve::readResistorToTemperature(void) {
   int vResistor = analogRead(PIN_VRES);
   int temp = map(vResistor, 0, 1023, 200, 500);
   wantTemp = (float)temp / 10;
-  return temp;
+  return wantTemp;
 }
 
-float SmartValve::readTemperature(int position) {
-  return 0.0f;
+void SmartValve::setTemperature(float cold, float out, float hot) {
+  inTemp.hotTemp = hot;
+  inTemp.coldTemp = cold;
+  if (out >= 50)
+    out = 50;
+  inTemp.outTemp = out;
 }
 
 String SmartValve::toTemperatureString(void) {
-  return String(wantTemp);
+  LCDString = "";
+  LCDString += String(inTemp.coldTemp, 1);
+  LCDString += "  ";
+  LCDString += String(inTemp.outTemp, 1);
+  LCDString += "  ";
+  LCDString += String(inTemp.hotTemp, 1);
+  return LCDString;
+}
+
+String SmartValve::toWantTemperatureString(void) {
+  return String(wantTemp, 1);
+}
+
+void SmartValve::setTempDiff(float diff) {
+  temperatureDiff = diff;
 }
 
 bool SmartValve::isCorrectTemp(void) {
-  return true;
+  float hotcoldDiff = abs(inTemp.hotTemp - inTemp.coldTemp);
+  return (hotcoldDiff <= temperatureDiff);
 }

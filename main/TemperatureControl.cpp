@@ -8,6 +8,9 @@ void TemperatureControl::initControl(int resolution) {
   lsensor = DallasTemperature(&lwire);
   rsensor = DallasTemperature(&rwire);
   msensor = DallasTemperature(&mwire);
+  lsensor.begin();
+  rsensor.begin();
+  msensor.begin();
   lsensor.getAddress(laddr, 0);
   rsensor.getAddress(raddr, 0);
   msensor.getAddress(maddr, 0);

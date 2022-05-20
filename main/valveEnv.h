@@ -14,4 +14,8 @@
 #define RIGHTSENSOR 20
 #define MIDSENSOR 30
 
+// information of servo number.
+#define LEFTVALVE 100
+#define RIGHTVALVE 200
+
 #endif

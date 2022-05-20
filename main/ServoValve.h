@@ -1,9 +1,11 @@
 #ifndef TEST_SERVOVALVE_H
 #define TEST_SERVOVALVE_H
 #include <Servo.h>
+#include "valveEnv.h"
 
 #define PIN_LSERVO 13
 #define PIN_RSERVO 12
+
 
 class ServoValve {
   private:
@@ -15,7 +17,7 @@ class ServoValve {
     ServoValve();
     void initValve(int _duration);
     void allClose();
-    void rotate(int direct);
+    void rotate(int direct, bool pos);
     void stopValve(int direct);
     bool setDuration(int _duration);
 };
