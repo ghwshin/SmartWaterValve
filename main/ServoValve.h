@@ -2,6 +2,7 @@
 #define TEST_SERVOVALVE_H
 #include <Servo.h>
 #include "valveEnv.h"
+#include "arduino.h"
 
 #define PIN_LSERVO 13
 #define PIN_RSERVO 12
@@ -17,8 +18,10 @@ class ServoValve {
     ServoValve();
     void initValve(int _duration);
     void allClose();
+    void allOpen();
     void rotate(int direct, bool pos);
     void stopValve(int direct);
+    void stopAllValve();
     bool setDuration(int _duration);
 };
 

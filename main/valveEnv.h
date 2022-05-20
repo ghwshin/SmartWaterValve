@@ -18,4 +18,6 @@
 #define LEFTVALVE 100
 #define RIGHTVALVE 200
 
+void LCDClear(void);
+
 #endif

@@ -4,6 +4,11 @@
 #include <Arduino.h>
 #define PIN_VRES A0
 
+enum HotCold {
+  Hot,
+  Cold,
+};
+
 typedef struct temp {
   float hotTemp;
   float coldTemp;
@@ -26,6 +31,7 @@ class SmartValve {
     String toWantTemperatureString(void);
     void setTempDiff(float diff);
     bool isCorrectTemp(void);
+    HotCold higherTemperature(void);
 };
 
 

@@ -33,7 +33,7 @@ String SmartValve::toTemperatureString(void) {
 }
 
 String SmartValve::toWantTemperatureString(void) {
-  return String(wantTemp, 1);
+  return "target : " + String(wantTemp, 1);
 }
 
 void SmartValve::setTempDiff(float diff) {
@@ -41,6 +41,12 @@ void SmartValve::setTempDiff(float diff) {
 }
 
 bool SmartValve::isCorrectTemp(void) {
-  float hotcoldDiff = abs(inTemp.hotTemp - inTemp.coldTemp);
-  return (hotcoldDiff <= temperatureDiff);
+  return (abs(inTemp.outTemp - wantTemp) <= temperatureDiff);
+}
+
+HotCold SmartValve::higherTemperature(void) {
+  if (inTemp.outTemp > wantTemp)
+    return HotCold(Hot);
+  else
+    return HotCold(Cold);
 }
