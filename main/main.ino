@@ -19,7 +19,7 @@ void setup() {
   // 서보 모터의 각회전 시간을 매개변수로 줌 : PWM
   servos.initValve(200);
   // 12bit resolution
-  tc.initControl(12);
+  tc.initControl(10);
   // 밸브 제어가 시작되기 위한 온도 차이 : 1도
   sv.setTempDiff(1.0);
 
@@ -35,7 +35,7 @@ void loop() {
 
 // for test.
 void test() {
-  sv.readResistorToTemperature();
+  sv.readResistorToTemperature(20.0, 50.0); // 매개변수 : 온도 상, 하한
   returnedTemp[0] = tc.readTemperatureAtPos(LEFTSENSOR);
   returnedTemp[1] = tc.readTemperatureAtPos(MIDSENSOR);
   //returnedTemp[2] = tc.readTemperatureAtPos(RIGHTSENSOR);
@@ -48,7 +48,6 @@ void test() {
   lcd.print(sv.toWantTemperatureString());
 
   if (!sv.isCorrectTemp()) {
-    int startTime = millis();
     if (sv.higherTemperature() == HotCold::Hot) {
       servos.rotate(RIGHTVALVE, true);
       servos.rotate(LEFTVALVE, false);

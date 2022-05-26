@@ -24,8 +24,8 @@ class SmartValve {
 
   public:
     SmartValve();
-    void initSystem(void);
-    float readResistorToTemperature(void);
+    //void initSystem(void);
+    float readResistorToTemperature(float lower_bound, float higher_bound);
     void setTemperature(float hot, float cold, float out);
     String toTemperatureString(void);
     String toWantTemperatureString(void);

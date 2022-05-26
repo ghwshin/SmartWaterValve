@@ -14,7 +14,7 @@ void ServoValve::allClose(void) {
   // 가능한가...? -> 닫는 방향으로 1초동안 돌리면 되지않을까?
   int cTime = millis();
   int tDuration = duration;
-  setDuration(250); // 1250ms
+  setDuration(500); // 1500ms
   rotate(LEFTVALVE, false); // 역방향 회전
   rotate(RIGHTVALVE, false);
   while (millis() - cTime < 1000) ; // 1sec

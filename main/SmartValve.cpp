@@ -7,9 +7,9 @@ SmartValve::SmartValve() {
   temperatureDiff = 0.0f;
 }
 
-float SmartValve::readResistorToTemperature(void) {
+float SmartValve::readResistorToTemperature(float lower_bound, float higher_bound) {
   int vResistor = analogRead(PIN_VRES);
-  int temp = map(vResistor, 0, 1023, 200, 500);
+  int temp = map(vResistor, 0, 1023, lower_bound * 10, higher_bound * 10);
   wantTemp = (float)temp / 10;
   return wantTemp;
 }
