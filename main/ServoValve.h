@@ -20,7 +20,7 @@ class ServoValve {
     void initValve(int _duration);
     void allClose();
     void allOpen();
-    void rotate(int direct, bool pos);
+    void rotate(int direct, bool pos, int moveTime);
     void stopValve(int direct);
     void stopAllValve();
     bool setDuration(int _duration);

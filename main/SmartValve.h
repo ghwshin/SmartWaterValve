@@ -29,8 +29,10 @@ class SmartValve {
     void setTemperature(float hot, float cold, float out);
     String toTemperatureString(void);
     String toWantTemperatureString(void);
+    float getWantTemperature(void);
     void setTempDiff(float diff);
     bool isCorrectTemp(void);
+    int temperatureToAngleTime(int tempDiff);
     HotCold higherTemperature(void);
 };
 

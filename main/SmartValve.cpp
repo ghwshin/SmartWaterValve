@@ -17,8 +17,6 @@ float SmartValve::readResistorToTemperature(float lower_bound, float higher_boun
 void SmartValve::setTemperature(float cold, float out, float hot) {
   inTemp.hotTemp = hot;
   inTemp.coldTemp = cold;
-  if (out >= 50)
-    out = 50;
   inTemp.outTemp = out;
 }
 
@@ -36,12 +34,20 @@ String SmartValve::toWantTemperatureString(void) {
   return "target : " + String(wantTemp, 1);
 }
 
+float SmartValve::getWantTemperature(void) {
+  return wantTemp;
+}
+
 void SmartValve::setTempDiff(float diff) {
   temperatureDiff = diff;
 }
 
 bool SmartValve::isCorrectTemp(void) {
   return (abs(inTemp.outTemp - wantTemp) <= temperatureDiff);
+}
+
+int SmartValve::temperatureToAngleTime(int tempDiff) {
+  return map(tempDiff, 0, 30, 0, 1000);
 }
 
 HotCold SmartValve::higherTemperature(void) {
